@@ -125,19 +125,19 @@ class AnimatedListComponent extends BlazeComponent
     assert not Tracker.active
 
     @constructor.calls.push ['insertDOMElement', @componentName(), trim(parent.outerHTML), trim(node.outerHTML), trim(before?.outerHTML or '')]
-    super
+    super arguments...
 
   moveDOMElement: (parent, node, before) ->
     assert not Tracker.active
 
     @constructor.calls.push ['moveDOMElement', @componentName(), trim(parent.outerHTML), trim(node.outerHTML), trim(before?.outerHTML or '')]
-    super
+    super arguments...
 
   removeDOMElement: (parent, node) ->
     assert not Tracker.active
 
     @constructor.calls.push ['removeDOMElement', @componentName(), trim(parent.outerHTML), trim(node.outerHTML)]
-    super
+    super arguments...
 
 BlazeComponent.register 'AnimatedListComponent', AnimatedListComponent
 
@@ -155,6 +155,7 @@ class ArgumentsComponent extends BlazeComponent
     'ArgumentsComponent'
 
   constructor: ->
+    super arguments...
     assert not Tracker.active
 
     @constructor.calls.push arguments[0]
@@ -169,7 +170,7 @@ class ArgumentsComponent extends BlazeComponent
   onCreated: ->
     assert not Tracker.active
 
-    super
+    super arguments...
 
     @collectStateChanges @constructor.onCreatedStateChanges
 
@@ -206,7 +207,7 @@ class ArgumentsComponent extends BlazeComponent
   onDestroyed: ->
     assert not Tracker.active
 
-    super
+    super arguments...
 
     Tracker.afterFlush =>
       while handle = @handles.pop()
@@ -493,6 +494,7 @@ class ChildComponent extends BlazeComponent
     'ChildComponent'
 
   constructor: (@childName) ->
+    super arguments...
     assert not Tracker.active
 
   onCreated: ->
@@ -503,7 +505,7 @@ class ChildComponent extends BlazeComponent
   insertDOMElement: (parent, node, before) ->
     assert not Tracker.active
 
-    super
+    super arguments...
 
     @domChanged Tracker.nonreactive =>
       @domChanged() + 1
@@ -511,7 +513,7 @@ class ChildComponent extends BlazeComponent
   moveDOMElement: (parent, node, before) ->
     assert not Tracker.active
 
-    super
+    super arguments...
 
     @domChanged Tracker.nonreactive =>
       @domChanged() + 1
@@ -519,7 +521,7 @@ class ChildComponent extends BlazeComponent
   removeDOMElement: (parent, node) ->
     assert not Tracker.active
 
-    super
+    super arguments...
 
     @domChanged Tracker.nonreactive =>
       @domChanged() + 1
@@ -544,6 +546,7 @@ class CaseComponent extends BlazeComponent
   @register 'CaseComponent'
 
   constructor: (kwargs) ->
+    super arguments...
     assert not Tracker.active
 
     @cases = kwargs.hash
@@ -606,7 +609,7 @@ class FirstMixinBase extends BlazeComponent
 
 class FirstMixin2 extends FirstMixinBase
   extendedHelper: ->
-    super + 2
+    super() + 2
 
   values: ->
     'b' + (@mixinParent().callFirstWith(@, 'values') or '')
@@ -643,7 +646,7 @@ class ExampleComponent extends BlazeComponent
   onCreated: ->
     assert not Tracker.active
 
-    super
+    super arguments...
     @counter = new ReactiveField 0
 
   events: ->
@@ -930,7 +933,7 @@ class LevelTwoComponent extends BlazeComponent
   @register 'LevelTwoComponent'
 
   onCreated: ->
-    super
+    super arguments...
 
     @autorun =>
       @constructor.children.push all: @childComponents().length

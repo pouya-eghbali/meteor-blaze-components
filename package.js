@@ -22,12 +22,12 @@ Package.registerBuildPlugin({
 });
 
 Package.onUse(function (api) {
-  api.versionsFrom('METEOR@1.4.1');
+  api.versionsFrom('METEOR@1.6.1');
 
   // Core dependencies.
   api.use([
     'blaze',
-    'coffeescript',
+    'coffeescript@2.3.2',
     'underscore',
     'tracker',
     'reactive-var',
@@ -91,7 +91,7 @@ Package.onUse(function (api) {
 });
 
 Package.onTest(function (api) {
-  api.versionsFrom('METEOR@1.4.1');
+  api.versionsFrom('METEOR@1.6.1');
 
   // Core dependencies.
   api.use([

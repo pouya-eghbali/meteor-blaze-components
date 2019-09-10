@@ -142,7 +142,7 @@ ExampleComponent.register('ExampleComponent');
   {{! You can access component's properties. }}
   <p>Counter: {{counter}}</p>
   {{! And component's methods. }}
-  <p>Message: {{customHelper}}</p>  
+  <p>Message: {{customHelper}}</p>
 </template>
 ```
 
@@ -198,7 +198,7 @@ class ExampleComponent extends BlazeComponent
   @register 'ExampleComponent'
 
   onCreated: ->
-    super
+    super arguments...
     @counter = new ReactiveField 0
 
   events: ->
@@ -477,7 +477,7 @@ if the value is an array):
 ```javascript
 class ExampleComponent extends BlazeComponent {
   /* ... */
-  
+
   attrs() {
     return {
       onClick: this.onButtonClick,
@@ -885,7 +885,7 @@ how the event handler can access `values` and `valuesPrediction` on mixin's inst
 inheritance works between `FirstMixinBase` and `FirstMixin`.
 
 Event handlers are independent from other mixins and the component's event handlers. They are attached to DOM in the
-normal traversal order, first the component's, then mixins'. 
+normal traversal order, first the component's, then mixins'.
 
 To control how events are propagated between the component and mixins you can use `event` object methods like
 [`stopPropagation`](https://api.jquery.com/event.stopPropagation/) and
@@ -1205,7 +1205,7 @@ events() {
     'click .accept, focus .accept, keypress': this.onMultiple
   });
 }
-   
+
 // Fires when any element is clicked.
 onClick(event) {
 }

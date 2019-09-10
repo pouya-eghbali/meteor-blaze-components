@@ -78,7 +78,7 @@ class PersistentInputComponent extends AutoSelectInputComponent
 
   value: ->
     # Return stored value during editing or normal otherwise.
-    @storedValue() or super
+    @storedValue() or super arguments...
 
   events: ->
     super.concat
@@ -193,7 +193,7 @@ class FormFieldMixin extends BlazeComponent
 
 class StorageMixin extends BlazeComponent
   constructor: (@collection, @fieldName, @selector) ->
-
+    super arguments...
   getValue: ->
     @collection.findOne(@selector())?[@fieldName]
 
@@ -206,7 +206,7 @@ class CancelableInputMixin extends BlazeComponent
   mixinParent: (mixinParent) ->
     # We rely on the persistent input mixin to obtain the stored value.
     mixinParent.requireMixin PersistentInputMixin2 if mixinParent
-    super
+    super arguments...
 
   events: -> [
     'keydown input': @onKeyDown

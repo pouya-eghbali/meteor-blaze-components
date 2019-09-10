@@ -555,7 +555,7 @@ editing it. To enable this, we'll store the current value (using
 
   value: -&gt;
     # Return stored value during editing or normal otherwise.
-    @storedValue() or super
+    @storedValue() or super arguments...
 
   events: -&gt;
     super.concat
@@ -1186,7 +1186,7 @@ ExtremeInputComponent.register('ExtremeInputComponent');{{/withES2015}}
 {{#withCoffeeScript}}class CancelableInputMixin extends BlazeComponent
   mixinParent: (mixinParent) -&gt;
     mixinParent.requireMixin PersistentInputMixin if mixinParent
-    super
+    super arguments...
 
   events: -&gt; [
     'keydown input': @onKeyDown
