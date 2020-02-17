@@ -1128,7 +1128,7 @@ REQUIRE_RENDERED_INSTANCE = [
 
 # We copy utility methods ($, findAll, subscribe, etc.) from the template instance prototype,
 # if a method with the same name does not exist already.
-for methodName, method of (Blaze.TemplateInstance::) when methodName not of (BlazeComponent::)
+for methodName, method in (Object.entries Blaze.TemplateInstance::) when methodName not of (BlazeComponent::)
   do (methodName, method) ->
     if methodName in SUPPORTS_REACTIVE_INSTANCE
       BlazeComponent::[methodName] = (args...) ->
